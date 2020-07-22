@@ -1,12 +1,8 @@
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
-import EnzymeAdapter from "enzyme-adapter-react-16";
-
+import { shallow } from "enzyme";
 import Congratulations from "./Congratulations";
 
 import { findByTestAttr, checkProps } from "../test/testUtils";
-
-Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 /**
  * Factory function to create a ShallowWrapper for the Congratulations component
@@ -42,5 +38,6 @@ test("renders a string to indicate congratulations message when success prop is 
 
 test("Does not throw warning with expected inherited prop type", () => {
 	const expectedProps = { success: false };
+
 	checkProps(Congratulations, expectedProps);
 });
