@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import PropTypes from "prop-types";
 
 /**
  * Functional React component for a victory condition congratulations message.
@@ -8,11 +9,11 @@ import React from 'react'
  */
 
 export default ({ success }) => {
-  return success ? (
-    <div data-test='component-congratulations'>
-      <div data-test='congratulations-message'>Winner!</div>
-    </div>
-  ) : (
-    <div data-test='component-congratulations' />
-  )
-}
+	return success ? (
+		<div data-test="component-congratulations">
+			<div data-test="congratulations-message">Winner!</div>
+		</div>
+	) : (
+		<div data-test="component-congratulations" />
+	);
+};
