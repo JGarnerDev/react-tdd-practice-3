@@ -1,43 +1,38 @@
 import React from "react";
 import { shallow } from "enzyme";
+
+import { checkProps, findByTestAttr } from "../test/testUtils";
+
 import Congratulations from "./Congratulations";
 
-import { findByTestAttr, checkProps } from "../test/testUtils";
-
-/**
- * Factory function to create a ShallowWrapper for the Congratulations component
- * @function setup
- * @param {object} props - Component props specific to this setup
- * @returns {ShallowWrapper}
- */
-
-const setup = (props = {}) => {
+function setup(props = {}) {
 	return shallow(<Congratulations {...props} />);
-};
+}
 
-test("renders without error ", () => {
+it("renders without error", () => {
 	const wrapper = setup();
-	const component = findByTestAttr(wrapper, "component-congratulations");
+	const node = findByTestAttr(wrapper, "component-congratulations");
 
-	expect(component.length).toBe(1);
+	expect(node.length).toBe(1);
 });
 
-test("renders no text when `success` prop is false ", () => {
-	const wrapper = setup({ success: false });
-	const component = findByTestAttr(wrapper, "component-congratulations");
+it("should default the success prop to false", () => {
+	const wrapper = setup();
 
-	expect(component.text()).toBe("");
+	expect("success" in wrapper.props()).toEqual(false);
 });
 
-test("renders a string to indicate congratulations message when success prop is true ", () => {
+it("should render a congratulations message if the success prop is true", () => {
 	const wrapper = setup({ success: true });
-	const message = findByTestAttr(wrapper, "congratulations-message");
-
-	expect(message.text().length).not.toBe(0);
+	const node = findByTestAttr(wrapper, "congratulations-msg");
+	expect(node.text()).toBe("Awww fuccc");
 });
 
-test("Does not throw warning with expected inherited prop type", () => {
-	const expectedProps = { success: false };
+it("Should render no congratulations message if the success prop is false", () => {
+	const wrapper = setup({ success: false });
+	const node = findByTestAttr(wrapper, "congratulations-msg");
 
-	checkProps(Congratulations, expectedProps);
+	expect(node.length).toBe(0);
 });
+
+// it("", () => {});
