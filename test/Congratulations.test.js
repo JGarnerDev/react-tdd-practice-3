@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { checkProps, findByTestAttr } from "../test/testUtils";
+import { findByTestAttr } from "./testUtils";
 
-import Congratulations from "./Congratulations";
+import Congratulations from "../src/components/Congratulations";
 
 function setup(props = {}) {
 	return shallow(<Congratulations {...props} />);

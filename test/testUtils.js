@@ -9,7 +9,7 @@ export function checkProps(component, conformingProps) {
 		component.propTypes,
 		conformingProps,
 		"prop",
-		component
+		component.name
 	);
 	expect(error).toBeUndefined();
 }
