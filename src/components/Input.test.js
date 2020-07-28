@@ -77,17 +77,14 @@ describe("Input component", () => {
 describe("`guessWord` action creator call", () => {
 	let guessWordMock;
 	let wrapper;
-	const guessedWord = "";
+	const guessedWord = "train";
+
 	beforeEach(() => {
 		guessWordMock = jest.fn();
 
-		const props = {
-			guessWord: guessWordMock,
-		};
+		wrapper = shallow(<UnconnectedInput guessWord={guessWordMock} />);
 
-		wrapper = shallow(<UnconnectedInput {...props} />);
-
-		wrapper.setState({ currentGuess: guessWord });
+		wrapper.setState({ currentGuess: guessedWord });
 
 		const submitButton = findByTestAttr(wrapper, "submit-button");
 		submitButton.simulate("click", { preventDefault() {} });
@@ -101,6 +98,11 @@ describe("`guessWord` action creator call", () => {
 
 	it("calls `guessWord` with input value as argument", () => {
 		const guessWordArg = guessWordMock.mock.calls[0][0];
+
 		expect(guessWordArg).toBe(guessedWord);
+	});
+
+	it("clears input box on submit", () => {
+		expect(wrapper.state("currentGuess")).toBe("");
 	});
 });
